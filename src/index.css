@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================
+   🌍 GLOBAL BASE STYLES
+   ===================================== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900 font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-semibold text-gray-900;
+  }
+
+  a {
+    @apply transition-colors duration-200 ease-out;
+  }
+
+  a:hover {
+    @apply text-brand-600;
+  }
+
+  /* Custom scrollbar (modern look) */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f3f4f6; /* Tailwind gray-100 */
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #dc2626; /* Tailwind red-600 */
+    border-radius: 8px;
+  }
+}
+
+/* =====================================
+   🧱 CUSTOM COMPONENTS
+   ===================================== */
+@layer components {
+  .section {
+    @apply py-16 px-6 max-w-7xl mx-auto;
+  }
+
+  .btn-primary {
+    @apply bg-brand-600 text-white px-6 py-3 rounded-full font-semibold shadow hover:bg-brand-700 transition;
+  }
+
+  .btn-outline {
+    @apply border border-gray-200 bg-white text-gray-800 px-6 py-3 rounded-full font-medium hover:border-brand-400 transition;
+  }
+
+  .card {
+    @apply bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition;
+  }
+
+  .gradient-bg {
+    background: linear-gradient(135deg, #dc2626 0%, #f87171 100%);
+  }
+}
+
+/* =====================================
+   ✨ UTILITY ENHANCEMENTS
+   ===================================== */
+@layer utilities {
+  .fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+}
