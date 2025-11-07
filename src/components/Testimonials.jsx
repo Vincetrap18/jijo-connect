@@ -5,12 +5,10 @@ const testimonials = [
   {
     name: "David, Nairobi",
     quote: "I got my dream job — thanks to Jijoh Tours & Tourism!",
-    image: "/images/testimonials/male-office.jpg",
   },
   {
     name: "Ahmed, Mombasa",
     quote: "Reliable, fast processing — I recommend Jijoh to everyone.",
-    image: "/images/testimonials/male-construction.jpg",
   },
 ];
 
@@ -30,23 +28,14 @@ export default function Testimonials() {
             key={i}
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
-            className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md"
+            className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md"
           >
-            <div className="flex items-center gap-4">
-              <img
-                src={t.image}
-                alt={t.name}
-                className="w-16 h-16 rounded-full object-cover"
-              />
-              <div>
-                <blockquote className="text-gray-800 italic">
-                  “{t.quote}”
-                </blockquote>
-                <figcaption className="mt-2 text-sm text-gray-600">
-                  — {t.name}
-                </figcaption>
-              </div>
-            </div>
+            <blockquote className="text-gray-800 italic text-lg leading-relaxed">
+              “{t.quote}”
+            </blockquote>
+            <figcaption className="mt-4 text-sm text-gray-600 text-right font-medium">
+              — {t.name}
+            </figcaption>
           </motion.figure>
         ))}
       </div>

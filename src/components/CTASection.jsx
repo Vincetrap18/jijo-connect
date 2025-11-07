@@ -17,14 +17,14 @@ export default function CTASection() {
 
         <div className="flex gap-3">
           <a
-            href="#apply"
+            href="apply"
             className="rounded-full bg-red-600 text-white px-5 py-3 font-semibold hover:bg-red-700 transition"
           >
             Apply Now
           </a>
           <a
             href="contact"
-            className="rounded-full border border-gray-200 px-5 py-3 hover:border-red-400 transition"
+            className="rounded-full border border-white-200 px-5 py-3 hover:border-red-400 transition"
           >
             Contact Us
           </a>

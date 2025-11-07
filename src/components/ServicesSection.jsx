@@ -1,5 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
+import {
+  Globe2,
+  Plane,
+  Wallet,
+  Sun,
+} from "lucide-react"; // ← Import Lucide icons
 
 const services = [
   {
@@ -7,28 +13,28 @@ const services = [
     bubble: "from-orange-400 to-orange-600 shadow-orange-500/40",
     title: "Direct Employment Visa",
     desc: "We handle verified job placements for bikers, security guards, drivers, waiters, and warehouse helpers — with guaranteed UAE contracts and employer support.",
-    icon: "/images/icons/motorbike.svg",
+    icon: <Globe2 className="w-7 h-7 text-white" />,
   },
   {
     gradient: "from-green-100 via-emerald-50 to-white text-emerald-600",
     bubble: "from-emerald-400 to-emerald-600 shadow-emerald-500/40",
     title: "Visit Visa for Job Seekers",
     desc: "Fly first, find work locally. Get your UAE visit visa processed in days — fast, affordable, and reliable with accommodation guidance upon arrival.",
-    icon: "/images/icons/passport.svg",
+    icon: <Plane className="w-7 h-7 text-white" />,
   },
   {
     gradient: "from-blue-100 via-blue-50 to-white text-blue-600",
     bubble: "from-blue-400 to-blue-600 shadow-blue-500/40",
     title: "Money Exchange & Transfers",
     desc: "Seamless AED ↔ KES remittances through M-Pesa and authorized UAE partners. Trusted by thousands for secure, real-time currency exchange.",
-    icon: "/images/images.jpeg",
+    icon: <Wallet className="w-7 h-7 text-white" />,
   },
   {
     gradient: "from-red-100 via-pink-50 to-white text-red-600",
     bubble: "from-red-400 to-pink-600 shadow-red-500/40",
     title: "Tourism & Holiday Packages",
     desc: "Plan your next getaway! From desert safaris to city tours — our curated Dubai packages include transport, guides, and unforgettable experiences.",
-    icon: "/images/icons/tourism.svg",
+    icon: <Sun className="w-7 h-7 text-white" />,
   },
 ];
 
@@ -78,7 +84,7 @@ export default function ServicesSection() {
               <div
                 className={`w-16 h-16 rounded-full bg-gradient-to-br ${s.bubble} flex items-center justify-center shadow-inner shadow-white/40 mb-5 group-hover:shadow-lg group-hover:shadow-current/30 transition-all duration-300`}
               >
-                <img src={s.icon} alt={s.title} className="w-7 h-7" />
+                {s.icon}
               </div>
 
               <h3 className="font-semibold text-gray-900 text-lg mb-2">{s.title}</h3>
