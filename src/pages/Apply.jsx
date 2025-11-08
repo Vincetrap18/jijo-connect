@@ -1,7 +1,38 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 
 export default function Apply() {
+  const form = useRef();
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(null);
+
+  const sendApplication = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    emailjs
+      .sendForm(
+        "service_qolhtqm",
+        "template_7bp6p2j",
+        form.current,
+        "alrGFoqZ5FrMimP3-"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          setSuccess(true);
+          setLoading(false);
+          form.current.reset();
+        },
+        (error) => {
+          console.log(error.text);
+          setSuccess(false);
+          setLoading(false);
+        }
+      );
+  };
+
   return (
     <section className="min-h-screen bg-neutral-50 flex items-center justify-center py-16 px-6">
       <motion.div
@@ -19,23 +50,14 @@ export default function Apply() {
         </p>
 
         {/* Form */}
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            alert("Application submitted successfully!");
-          }}
-          className="space-y-5"
-        >
+        <form ref={form} onSubmit={sendApplication} className="space-y-5">
           <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-neutral-700 mb-1"
-            >
+            <label className="block text-sm font-medium text-neutral-700 mb-1">
               Full Name
             </label>
             <input
-              id="name"
               type="text"
+              name="user_name"
               required
               className="w-full rounded-md border-neutral-300 focus:border-brand-500 focus:ring-brand-500 transition"
               placeholder="John Doe"
@@ -43,15 +65,12 @@ export default function Apply() {
           </div>
 
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-neutral-700 mb-1"
-            >
+            <label className="block text-sm font-medium text-neutral-700 mb-1">
               Email Address
             </label>
             <input
-              id="email"
               type="email"
+              name="user_email"
               required
               className="w-full rounded-md border-neutral-300 focus:border-brand-500 focus:ring-brand-500 transition"
               placeholder="you@example.com"
@@ -59,15 +78,12 @@ export default function Apply() {
           </div>
 
           <div>
-            <label
-              htmlFor="phone"
-              className="block text-sm font-medium text-neutral-700 mb-1"
-            >
+            <label className="block text-sm font-medium text-neutral-700 mb-1">
               Phone Number
             </label>
             <input
-              id="phone"
               type="tel"
+              name="user_phone"
               required
               className="w-full rounded-md border-neutral-300 focus:border-brand-500 focus:ring-brand-500 transition"
               placeholder="+254 712 345 678"
@@ -75,14 +91,11 @@ export default function Apply() {
           </div>
 
           <div>
-            <label
-              htmlFor="service"
-              className="block text-sm font-medium text-neutral-700 mb-1"
-            >
+            <label className="block text-sm font-medium text-neutral-700 mb-1">
               Service Interested In
             </label>
             <select
-              id="service"
+              name="service"
               required
               className="w-full rounded-md border-neutral-300 focus:border-brand-500 focus:ring-brand-500 transition"
             >
@@ -95,14 +108,11 @@ export default function Apply() {
           </div>
 
           <div>
-            <label
-              htmlFor="message"
-              className="block text-sm font-medium text-neutral-700 mb-1"
-            >
+            <label className="block text-sm font-medium text-neutral-700 mb-1">
               Additional Details
             </label>
             <textarea
-              id="message"
+              name="message"
               rows="3"
               className="w-full rounded-md border-neutral-300 focus:border-brand-500 focus:ring-brand-500 transition"
               placeholder="Tell us a bit more about your needs..."
@@ -112,9 +122,13 @@ export default function Apply() {
           <button
             type="submit"
             className="w-full py-3 rounded-full bg-brand-gradient text-white font-semibold shadow-brand hover:shadow-glow transition-all duration-300"
+            disabled={loading}
           >
-            Submit Application
+            {loading ? "Submitting..." : "Submit Application"}
           </button>
+
+          {success === true && <p className="text-green-600 mt-2 text-center">Application submitted successfully!</p>}
+          {success === false && <p className="text-red-600 mt-2 text-center">Failed to submit. Please try again.</p>}
         </form>
       </motion.div>
     </section>

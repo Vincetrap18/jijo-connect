@@ -1,7 +1,38 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { MapPin, Phone, Mail } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
+  const form = useRef();
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(null);
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    emailjs
+      .sendForm(
+        "service_qolhtqm",       // Your Service ID
+        "template_kmjeaac",      // Your Template ID
+        form.current,
+        "alrGFoqZ5FrMimP3-"     // EmailJS Public Key
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          setSuccess(true);
+          setLoading(false);
+          form.current.reset();
+        },
+        (error) => {
+          console.log(error.text);
+          setSuccess(false);
+          setLoading(false);
+        }
+      );
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-6 py-20 text-gray-800">
       {/* Page Heading */}
@@ -17,37 +48,50 @@ export default function Contact() {
       {/* Contact Form & Info */}
       <div className="grid md:grid-cols-2 gap-10">
         {/* Contact Form */}
-        <form className="space-y-4 p-8 rounded-2xl shadow-xl border border-gray-100 bg-gradient-to-br from-white to-red-50">
+        <form
+          ref={form}
+          onSubmit={sendEmail}
+          className="space-y-4 p-8 rounded-2xl shadow-xl border border-gray-100 bg-gradient-to-br from-white to-red-50"
+        >
           <div>
             <label className="block text-sm font-medium text-gray-700">Full Name</label>
             <input
               type="text"
+              name="user_name"
               className="mt-1 w-full rounded-lg border-gray-200 focus:ring-red-500 focus:border-red-500 shadow-sm"
               placeholder="John Doe"
+              required
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Email</label>
             <input
               type="email"
+              name="user_email"
               className="mt-1 w-full rounded-lg border-gray-200 focus:ring-red-500 focus:border-red-500 shadow-sm"
               placeholder="john@example.com"
+              required
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">Message</label>
             <textarea
+              name="message"
               rows="5"
               className="mt-1 w-full rounded-lg border-gray-200 focus:ring-red-500 focus:border-red-500 shadow-sm"
               placeholder="How can we assist you?"
+              required
             />
           </div>
           <button
             type="submit"
             className="w-full bg-red-600 text-white py-3 rounded-full font-semibold hover:bg-red-700 transition shadow-lg"
+            disabled={loading}
           >
-            Send Message
+            {loading ? "Sending..." : "Send Message"}
           </button>
+          {success === true && <p className="text-green-600 mt-2">Message sent successfully!</p>}
+          {success === false && <p className="text-red-600 mt-2">Failed to send. Please try again.</p>}
         </form>
 
         {/* Contact Info & Maps */}
@@ -63,7 +107,6 @@ export default function Contact() {
               <br />
               <span className="font-medium text-gray-800">UAE Office:</span> Al Qusais, Dubai
             </p>
-            {/* Maps */}
             <div className="grid gap-4 mt-4">
               <iframe
                 title="Kenya Office Map"
