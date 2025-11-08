@@ -100,7 +100,7 @@ export default function Contact() {
             <Mail className="w-6 h-6 text-sky-500" />
             <div>
               <h3 className="font-semibold text-gray-900 text-lg">Email</h3>
-              <p className="text-gray-600 text-sm">info@jijohconnect.com</p>
+              <p className="text-gray-600 text-sm">jijohtours@gmail.com</p>
             </div>
           </div>
         </div>
