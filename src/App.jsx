@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import Router from './routes/Router';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import WhatsAppButton from './components/WhatsAppButton';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 
@@ -39,6 +40,9 @@ export default function App() {
 
       {/* ===== FOOTER ===== */}
       <Footer />
+
+      {/* ===== WhatsApp Floating Button ===== */}
+      <WhatsAppButton />
     </div>
   );
 }

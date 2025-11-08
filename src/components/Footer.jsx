@@ -37,7 +37,7 @@ export default function Footer() {
             <br />
             UAE: <span className="font-medium text-gray-800">+971 581084957</span>
           </p>
-          <p className="mt-2 text-gray-600">Email: info@jijohconnect.com</p>
+          <p className="mt-2 text-gray-600">Email: jijohtours@gmail.com</p>
         </div>
       </div>
 
