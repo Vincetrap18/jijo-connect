@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import logo from "../assets/images/logo.png"; // ✅ import your logo
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -22,12 +23,16 @@ export default function Header() {
           className="flex items-center gap-2 group"
           aria-label="Jijoh Tours & Tourism Home"
         >
-          <div className="w-10 h-10 bg-brand-500 text-white flex items-center justify-center rounded-full font-bold text-lg transition-transform duration-300 group-hover:scale-110">
-            J
-          </div>
+          <img
+            src={logo}
+            alt="Jijoh Tours & Tourism Logo"
+            className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+          />
+
           <span className="font-heading text-lg font-bold text-neutral-800 tracking-tight">
             Jijoh <span className="text-brand-500">Connect</span>
           </span>
+          
         </NavLink>
 
         {/* ===== DESKTOP MENU ===== */}
